@@ -58,6 +58,8 @@ main {
   margin-inline: auto;
   padding: var(--space-6) var(--space-3) var(--space-7);
   min-height: 80vh;
+  overflow: hidden; /* contains the portrait's edge-bleed within the section,
+                        so it never pushes past the actual viewport edge */
 }
 
 @media (min-width: 768px) {
@@ -130,8 +132,10 @@ main {
   .hero__portrait {
     order: 2;
     justify-self: end;
-    width: 110%;
-    margin-right: -10%;
+    width: 100%;
+    /* No edge-bleed transform — a real photo shouldn't have its
+       subject cropped off-screen. Asymmetry now comes only from the
+       55/45 grid split, not from pushing the image past the frame. */
   }
 }
 
