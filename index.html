@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ============================================================
+       SEO: unique per-page title + description (Design Bible §26)
+       ============================================================ -->
+  <title>Arbaz Khan — Frontend Engineer &amp; Interaction Designer</title>
+  <meta name="description" content="Arbaz Khan is a frontend engineer who designs and builds interfaces where motion and detail carry as much weight as function. Explore selected projects, services, and get in touch.">
+  <meta name="author" content="Sana Rehal">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sana Rehal — Frontend Engineer & Interaction Designer">
+  <meta property="og:description" content="Interfaces built with precision, held gently. Selected work, services, and contact.">
+  <meta property="og:image" content="assets/images/og-cover.jpg">
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+  <!-- Fonts: self-hosted, loaded in base.css via @font-face (Design Bible §39-40) -->
+ <link rel="stylesheet" href="css/base.css">
+ <link rel="stylesheet" href="css/components.css">
+ <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="page page--home">
+
+  <!-- ============================================================
+       Accessibility: skip link, first focusable element on the page,
+       lets keyboard/screen-reader users bypass nav (Design Bible §27)
+       ============================================================ -->
+  <a class="u-skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ============================================================
+       LAYER 2 — Aurora lighting layer (fixed background).
+       Purely decorative, so it is aria-hidden and sits behind all
+       content. Two named sources only: Aurora-A (cool blue, top-left)
+       and Aurora-B (violet, bottom-right) — Design Bible §16.
+       Actual gradient/positioning implemented in components.css.
+       ============================================================ -->
+  <div class="aurora" aria-hidden="true">
+    <div class="aurora__source aurora__source--a"></div>
+    <div class="aurora__source aurora__source--b"></div>
+  </div>
+
+  <!-- ============================================================
+       LAYER 3 — Noise texture overlay (decorative, fixed, tiled SVG).
+       Design Bible §5 / Layer System.
+       ============================================================ -->
+  <div class="noise-layer" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       LAYER 6 — Depth Rail: the site's signature motif.
+       Tracks scroll position + current section label.
+       Present, in equivalent form, on every page (Design Bible rule 54).
+       Populated/updated by main.js — static structure only here.
+       ============================================================ -->
+  <nav class="depth-rail" aria-label="Page scroll progress">
+    <div class="depth-rail__track">
+      <div class="depth-rail__fill"></div>
+    </div>
+    <ul class="depth-rail__ticks" role="list">
+      <li class="depth-rail__tick depth-rail__tick--active" data-section="hero">
+        <span class="depth-rail__label">Arrival</span>
+      </li>
+      <li class="depth-rail__tick" data-section="approach">
+        <span class="depth-rail__label">Approach</span>
+      </li>
+      <li class="depth-rail__tick" data-section="featured-work">
+        <span class="depth-rail__label">Proof</span>
+      </li>
+      <li class="depth-rail__tick" data-section="closing-cta">
+        <span class="depth-rail__label">Next</span>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ============================================================
+       Primary site navigation. Sticky glass bar (Design Bible §15,
+       structural glass — Level 1 only, never brightens on hover).
+       ============================================================ -->
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__logo" href="index.html" aria-label="Arbaz Khan — home">
+        <span class="nav__logo-mark" aria-hidden="true">•AK</span>
+      </a>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+        <span class="u-visually-hidden">Open menu</span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li class="nav__item">
+          <a class="nav__link nav__link--current" href="index.html" aria-current="page">Home</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="about.html">About</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="projects.html">Projects</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="services.html">Services</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="contact.html">Contact</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link nav__link--resume" href="resume.html">Résumé</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main id="main-content">
+
+    <!-- ==========================================================
+         ACT I — Arrival. The hero. Asymmetric split layout
+         (Design Bible §13 / Experience Architecture §1).
+         No centered, symmetric hero (Design Bible rule 16).
+         ========================================================== -->
+    <section class="hero" id="hero" aria-labelledby="hero-heading">
+      <div class="hero__content">
+        <p class="hero__eyebrow">
+          <span class="hero__status-dot" aria-hidden="true"></span>
+          Available for select freelance work
+        </p>
+
+        <h1 class="hero__heading" id="hero-heading">
+          Interfaces built with<br>precision, held gently.
+        </h1>
+
+        <p class="hero__story">
+          I'm Sana — a frontend engineer who spends more time deciding
+          what to leave out than what to add. I build interfaces for
+          products that need to feel as considered as they are
+          functional: fintech dashboards, design systems, and the
+          occasional experiment that has no business reason to exist
+          except that it taught me something.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="resume.html">
+            Download résumé
+          </a>
+          <a class="btn btn--secondary" href="projects.html">
+            View the work
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero image: layered glass capsule, cropped/bleeding off the
+           viewport edge — never a centered circle-crop portrait
+           (Design Bible rule 16). Replace src with real photo. -->
+      <div class="hero__portrait" aria-hidden="false">
+        <div class="hero__portrait-glass">
+          <img
+            class="hero__portrait-image"
+            src="assets/images/portrait-placeholder.jpg"
+            alt="Portrait of Sana Rehal, frontend engineer"
+            width="640"
+            height="800"
+            loading="eager"
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         Approach — short bridging section between "who" (hero) and
+         "proof" (featured work). Establishes the how-I-think claim
+         in specific terms, not generic buzzwords (Design Bible §21-22).
+         ========================================================== -->
+    <section class="approach" id="approach" aria-labelledby="approach-heading">
+      <h2 class="approach__heading" id="approach-heading">
+        Three things I don't compromise on
+      </h2>
+
+      <ul class="approach__list" role="list">
+        <li class="approach__item">
+          <h3 class="approach__item-title">Motion has to earn its place</h3>
+          <p class="approach__item-body">
+            If an animation doesn't clarify state or hierarchy, it's
+            cut — regardless of how good it looks in isolation.
+          </p>
+        </li>
+        <li class="approach__item">
+          <h3 class="approach__item-title">Accessibility is a constraint, not a pass</h3>
+          <p class="approach__item-body">
+            Keyboard support, contrast, and reduced-motion handling are
+            built in from the first commit, not patched in at the end.
+          </p>
+        </li>
+        <li class="approach__item">
+          <h3 class="approach__item-title">Every screen has a job</h3>
+          <p class="approach__item-body">
+            Before I open a design tool, I can state the one thing a
+            screen needs to help someone do. If I can't, it isn't ready.
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ==========================================================
+         ACT III preview — Featured work. Home shows a restrained
+         teaser (1-2 projects), full case studies live on
+         projects.html. 8/4 hierarchy split carries over even here
+         (Design Bible §13).
+         ========================================================== -->
+    <section class="featured-work" id="featured-work" aria-labelledby="featured-work-heading">
+      <div class="featured-work__header">
+        <h2 class="featured-work__heading" id="featured-work-heading">
+          Selected work
+        </h2>
+        <a class="featured-work__all-link" href="projects.html">
+          See all projects
+        </a>
+      </div>
+
+      <!-- Placeholder featured project card. Content (image, tags,
+           links) to be replaced with real project data before launch.
+           Structure is data-driven per Design Bible §25 / rule 49. -->
+      <article class="project-card project-card--featured">
+        <div class="project-card__media">
+          <img
+            class="project-card__image"
+            src="assets/images/project-placeholder-01.jpg"
+            alt="Dashboard interface for a fintech reporting tool, showing layered data cards and a dark UI"
+            width="1200"
+            height="800"
+            loading="lazy"
+          >
+        </div>
+        <div class="project-card__body">
+          <p class="project-card__category">Fintech · Dashboard</p>
+          <h3 class="project-card__title">Ledger — real-time reporting for treasury teams</h3>
+          <p class="project-card__description">
+            Rebuilt a reporting dashboard that was losing users to
+            spreadsheet exports. The constraint was five-year-old legacy
+            data endpoints we couldn't touch; the fix was an interface
+            layer that made stale-vs-live data visually unambiguous.
+          </p>
+          <ul class="project-card__tags" role="list">
+            <li class="project-card__tag">TypeScript</li>
+            <li class="project-card__tag">D3.js</li>
+            <li class="project-card__tag">Design systems</li>
+          </ul>
+          <div class="project-card__links">
+            <a class="btn btn--secondary" href="projects.html">Read the case study</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ==========================================================
+         Closing CTA — bridges Home to Contact. Calm, not urgent
+         (matches Act V tone from Experience Architecture, previewed
+         here in miniature).
+         ========================================================== -->
+    <section class="closing-cta" id="closing-cta" aria-labelledby="closing-cta-heading">
+      <h2 class="closing-cta__heading" id="closing-cta-heading">
+        Have something worth building?
+      </h2>
+      <p class="closing-cta__body">
+        I take on a small number of projects at a time. If yours needs
+        real thought rather than a template, I'd like to hear about it.
+      </p>
+      <a class="btn btn--primary" href="contact.html">Start a conversation</a>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       Footer — minimal, elegant (Design Bible / Experience
+       Architecture footer spec). Shared structure across all pages.
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="index.html" aria-label="Sana Rehal — home">
+        <span class="nav__logo-mark" aria-hidden="true">•SR</span>
+      </a>
+
+      <nav class="site-footer__links" aria-label="Footer">
+        <ul class="site-footer__link-list" role="list">
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="resume.html">Résumé</a></li>
+        </ul>
+      </nav>
+
+      <ul class="site-footer__social" role="list" aria-label="Social links">
+        <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:hello@sanarehal.dev">Email</a></li>
+      </ul>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">
+        © <span id="current-year">2026</span> Sana Rehal. Built by hand with HTML, CSS, and JavaScript.
+      </p>
+      <button class="site-footer__back-to-top" type="button" aria-label="Back to top">
+        ↑ <span class="u-visually-hidden">Back to top</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       LAYER 7 — Cursor glow. Fine-pointer only; disabled entirely
+       on touch devices via JS feature detection (Design Bible §26 /
+       rule 26). Empty container populated by main.js.
+       ============================================================ -->
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</body>
+</html>

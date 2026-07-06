@@ -1,0 +1,376 @@
+/* ================================================================
+   BASE.CSS
+   Design tokens, reset, and global typography defaults ONLY.
+   No component styling and no page-layout rules belong in this file
+   (Design Bible §30 — CSS Architecture Philosophy). If a rule here
+   starts describing how a specific component looks, it has drifted
+   out of scope and belongs in components.css instead.
+   ================================================================ */
+
+
+/* ----------------------------------------------------------------
+   1. DESIGN TOKENS
+   Single source of truth for every color, spacing, radius, type,
+   motion, and z-index value used anywhere in the project. Component
+   and page CSS must always reference these variables — never a raw
+   hex/px value (Design Bible rule 48).
+   ---------------------------------------------------------------- */
+:root {
+
+  /* --- Color: void / panel base (Design Bible §18) --- */
+  --bg-void: #0A0B0E;         /* primary page background — never pure #000 */
+  --bg-panel: #12141A;        /* base surface under glass, before blur */
+  --bg-panel-modal: #0E0F13;  /* slightly darker/denser glass for modals (§15) */
+
+  /* --- Color: text --- */
+  --text-primary: #EDEEF2;    /* never pure #FFF */
+  --text-muted: #8B8F9C;
+  --text-on-accent: #0A0B0E;  /* for text sitting on filled accent buttons */
+
+  /* --- Color: the two named light sources (Design Bible §16) --- */
+  --aurora-blue: #4C7FFF;     /* Aurora-A — cool, top-left, "arrival/thought" */
+  --aurora-violet: #8B5CF6;   /* Aurora-B — warm, bottom-right, "output/craft" */
+
+  /* --- Color: the single reserved signal color (Design Bible rule 2) --- */
+  --accent-line: #5EEAD4;     /* depth rail + status dots ONLY. Never decorative. */
+
+  /* --- Color: glass borders (Design Bible §14 — Elevation) --- */
+  --glass-border-resting: rgba(255, 255, 255, 0.08);
+  --glass-border-active: rgba(255, 255, 255, 0.16);
+
+  /* --- Typography: font families (Design Bible §17) --- */
+  --font-display: "Fraunces", Georgia, serif;         /* H1/H2 only */
+  --font-body: "Inter", -apple-system, sans-serif;      /* UI + paragraphs */
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;  /* data, tags, wordmark */
+
+  /* --- Typography: scale (Design Bible §17) --- */
+  --text-h1: clamp(2.75rem, 5vw, 4.5rem);
+  --text-h2: clamp(2rem, 3.5vw, 3rem);
+  --text-h3: 1.5rem;
+  --text-body: 1.0625rem;
+  --text-small: 0.8125rem;
+
+  /* --- Typography: line-height --- */
+  --leading-display: 1.1;
+  --leading-body: 1.6;
+
+  /* --- Spacing: 8px base scale (Design Bible §12) --- */
+  --space-1: 0.5rem;   /* 8px */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+  --space-5: 3rem;     /* 48px */
+  --space-6: 4rem;     /* 64px */
+  --space-7: 6rem;     /* 96px */
+  --space-8: 8rem;     /* 128px */
+
+  /* --- Radius: 4-step scale (Design Bible §11) --- */
+  --radius-xs: 6px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-pill: 999px; /* primary CTA only — see components.css */
+
+  /* --- Elevation: blur levels (Design Bible §14 — max 2 values, ever) --- */
+  --blur-level-1: 16px; /* resting glass */
+  --blur-level-2: 24px; /* active/hovered glass */
+
+  /* --- Grid (Design Bible §13) --- */
+  --grid-max-width: 1440px;
+  --grid-gutter: var(--space-3);
+
+  /* --- Motion: durations (Design Bible §3 — only two speeds) --- */
+  --duration-structural: 750ms;   /* page load, section reveal, page transitions */
+  --duration-micro: 220ms;        /* hover, tilt, press */
+
+  /* --- Motion: easing curves (Design Bible §3) --- */
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);   /* structural: slight overshoot, then rest */
+  --ease-linear-out: cubic-bezier(0.4, 0, 0.2, 1); /* micro-interactions: no overshoot */
+
+  /* --- Z-index / layer system (Design Bible Layer System, §5 of Experience Architecture) --- */
+  --z-void: 0;
+  --z-aurora: 1;
+  --z-noise: 2;
+  --z-floating-objects: 3;
+  --z-content: 10;
+  --z-depth-rail: 20;
+  --z-header: 25;
+  --z-cursor-glow: 30;
+  --z-overlay: 40;
+}
+
+
+/* ----------------------------------------------------------------
+   2. FONT LOADING
+   Self-hosted, woff2 only, font-display: swap, only weights actually
+   used by the type hierarchy (Design Bible §39-40). Place the
+   corresponding .woff2 files in /assets/fonts before launch — these
+   declarations intentionally point at files that do not exist yet.
+   ---------------------------------------------------------------- */
+@font-face {
+  font-family: "Fraunces";
+  src: url("../assets/fonts/fraunces-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../assets/fonts/fraunces-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/inter-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/inter-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/inter-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../assets/fonts/jetbrains-mono-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../assets/fonts/jetbrains-mono-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ----------------------------------------------------------------
+   3. RESET
+   Minimal, modern reset — normalizes box model and removes default
+   spacing without stripping semantics visitors depend on.
+   ---------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Prevents iOS text-size-adjust weirdness without disabling zoom */
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* native scroll only — no scroll-jacking, per Experience Architecture §6 */
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* guards against the floating/aurora layers ever forcing horizontal scroll */
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Images without explicit width/height still reserve space via
+   aspect-ratio at the component level (pages.css / components.css) —
+   this is a global fallback only. */
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+
+/* ----------------------------------------------------------------
+   4. GLOBAL TYPOGRAPHY DEFAULTS
+   Element-level rules only. Component-specific type treatment
+   (e.g. a card title's exact size) lives in components.css.
+   ---------------------------------------------------------------- */
+h1,
+h2 {
+  font-family: var(--font-display);
+  line-height: var(--leading-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: var(--text-h1);
+}
+
+h2 {
+  font-size: var(--text-h2);
+}
+
+h3,
+h4 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: var(--text-h3);
+}
+
+p {
+  font-family: var(--font-body);
+}
+
+/* Data/mono role — tags, dates, tech labels, depth-rail text
+   (Design Bible §17). Applied via this class wherever mono content
+   appears in components/pages. */
+.font-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  letter-spacing: 0.02em;
+}
+
+
+/* ----------------------------------------------------------------
+   5. FOCUS STATES
+   Global, visible, on-brand focus ring — never removed
+   (Design Bible rule 28). Uses the accent-line color since focus
+   is a genuine status signal, consistent with §2's reservation of
+   that color for signals only.
+   ---------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--accent-line);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+/* Remove the default focus ring only where :focus-visible is
+   supported and not active — never remove focus styling outright. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+/* ----------------------------------------------------------------
+   6. GLOBAL UTILITIES
+   Layout/accessibility helpers only — never used for one-off visual
+   styling that belongs in a component (Design Bible rule 46).
+   ---------------------------------------------------------------- */
+
+/* Visually hides content while keeping it available to assistive
+   technology — used for icon-only buttons, decorative toggles, etc. */
+.u-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip-to-content link: visually hidden until focused, then snaps
+   into view at the top of the viewport (Design Bible §27). */
+.u-skip-link {
+  position: absolute;
+  top: -48px;
+  left: var(--space-2);
+  z-index: var(--z-overlay);
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--bg-panel);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border-active);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-weight: 500;
+  transition: top var(--duration-micro) var(--ease-linear-out);
+}
+
+.u-skip-link:focus {
+  top: var(--space-2);
+}
+
+/* Shared max-width content container. Component/page CSS composes
+   with this rather than redefining max-width per section. */
+.u-container {
+  width: 100%;
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .u-container {
+    padding-inline: var(--space-5);
+  }
+}
+
+
+/* ----------------------------------------------------------------
+   7. REDUCED MOTION (global switch)
+   The specific ambient/looping animations this disables live in
+   components.css and animations.js; this block is the site-wide
+   contract that those files must honor (Design Bible rule 24-25).
+   ---------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

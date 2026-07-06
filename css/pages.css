@@ -1,0 +1,298 @@
+/* ================================================================
+   PAGES.CSS
+   Layout and arrangement ONLY — how existing components are placed
+   on a given page. Never redefines a component's own visual identity
+   (that belongs in components.css). Organized by page, in build
+   order; sections are appended here as each page is built.
+   (Design Bible §30 — CSS Architecture Philosophy)
+   ================================================================ */
+
+
+/* ================================================================
+   HOME (index.html)
+   Four-act structure: Arrival → Approach → Proof → Next. Mapped
+   1:1 to the depth rail's tick labels in the HTML.
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   Shared page-level content wrapper. Leaves room for the depth
+   rail on desktop so content never sits underneath it.
+   ---------------------------------------------------------------- */
+.page--home .aurora__source--a {
+  opacity: 0.4; /* Aurora-A is strongest on Home + About intro — Design Bible §16 */
+}
+
+main {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+@media (min-width: 768px) {
+  main,
+  .site-header .nav,
+  .site-footer__top,
+  .site-footer__bottom {
+    padding-left: 64px; /* clears the fixed desktop depth rail */
+  }
+}
+
+@media (max-width: 767px) {
+  main {
+    padding-top: 3px; /* clears the fixed mobile depth rail bar */
+  }
+}
+
+
+/* ----------------------------------------------------------------
+   ACT I — Hero
+   Asymmetric split: text anchored left (~55%), portrait bleeds off
+   the right edge inside a layered glass capsule. Never centered,
+   never symmetric (Design Bible rule 16).
+   ---------------------------------------------------------------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-3) var(--space-7);
+  min-height: 80vh;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    grid-template-columns: 55% 45%;
+    padding: var(--space-7) var(--space-5) var(--space-8);
+    min-height: 88vh;
+  }
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  order: 2; /* mobile: portrait above headline, per Mobile-First Strategy */
+}
+
+@media (min-width: 768px) {
+  .hero__content {
+    order: 1;
+  }
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.hero__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-line);
+  box-shadow: 0 0 6px rgba(94, 234, 212, 0.7);
+}
+
+.hero__heading {
+  max-width: 14ch;
+}
+
+.hero__story {
+  max-width: 46ch;
+  color: var(--text-muted);
+  font-size: 1.125rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.hero__portrait {
+  order: 1;
+  position: relative;
+  width: 100%;
+  /* Bleeds off the viewport edge on desktop — intentionally cropped,
+     not a shrunk, centered version of itself (Design Bible rule 16). */
+  justify-self: center;
+}
+
+@media (min-width: 768px) {
+  .hero__portrait {
+    order: 2;
+    justify-self: end;
+    width: 110%;
+    margin-right: -10%;
+  }
+}
+
+.hero__portrait-glass {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--glass-border-resting);
+  /* Slow idle drift, independent of and out of phase with the aurora
+     layer (Design Bible / Experience Architecture §2). */
+  animation: hero-portrait-drift 12s var(--ease-linear-out) infinite alternate;
+}
+
+@keyframes hero-portrait-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+.hero__portrait-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.05) hue-rotate(-2deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__portrait-glass {
+    animation: none;
+  }
+}
+
+
+/* ----------------------------------------------------------------
+   Approach
+   Three peer items — content is genuinely equal in weight, so an
+   even 3-column split is the correct (not default-by-laziness)
+   choice here (Design Bible §13).
+   ---------------------------------------------------------------- */
+.approach {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-7) var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .approach {
+    padding: var(--space-7) var(--space-5);
+  }
+}
+
+.approach__heading {
+  max-width: 22ch;
+  margin-bottom: var(--space-5);
+}
+
+.approach__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .approach__list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+}
+
+.approach__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-top: 1px solid var(--glass-border-resting);
+}
+
+.approach__item-body {
+  color: var(--text-muted);
+}
+
+
+/* ----------------------------------------------------------------
+   ACT III preview — Featured work
+   8/4 hierarchy carried over from the Projects page grid rule, even
+   in single-card teaser form (Design Bible §13).
+   ---------------------------------------------------------------- */
+.featured-work {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-3) var(--space-7);
+}
+
+@media (min-width: 768px) {
+  .featured-work {
+    padding: var(--space-6) var(--space-5) var(--space-8);
+  }
+}
+
+.featured-work__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .featured-work__header {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+}
+
+.featured-work__all-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--accent-line);
+  white-space: nowrap;
+}
+
+.project-card--featured {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .project-card--featured {
+    grid-template-columns: 8fr 4fr; /* the 8/4 hierarchy split, applied here as columns */
+  }
+
+  .project-card--featured .project-card__media {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+}
+
+
+/* ----------------------------------------------------------------
+   ACT V preview — Closing CTA
+   Calm, centered, deliberately quiet — the one section on Home
+   allowed to be symmetric, since by this point the asymmetric
+   hero has already made its point (Design Bible §Motion — restraint
+   increases as trust is established).
+   ---------------------------------------------------------------- */
+.closing-cta {
+  max-width: 640px;
+  margin-inline: auto;
+  padding: var(--space-7) var(--space-3) var(--space-8);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.closing-cta__body {
+  color: var(--text-muted);
+}
