@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Services — Sana Rehal, Frontend Engineer</title>
+  <meta name="description" content="Frontend engineering services offered by Sana Rehal: website development, responsive design, landing pages, UI/UX, and performance optimization.">
+  <meta name="author" content="Sana Rehal">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Services — Sana Rehal">
+  <meta property="og:description" content="What I can build for you, and how each engagement works.">
+  <meta property="og:image" content="assets/images/og-cover.jpg">
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="page page--services">
+
+  <a class="u-skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="aurora" aria-hidden="true">
+    <div class="aurora__source aurora__source--a"></div>
+    <div class="aurora__source aurora__source--b"></div>
+  </div>
+
+  <div class="noise-layer" aria-hidden="true"></div>
+
+  <nav class="depth-rail" aria-label="Page scroll progress">
+    <div class="depth-rail__track">
+      <div class="depth-rail__fill"></div>
+    </div>
+    <ul class="depth-rail__ticks" role="list">
+      <li class="depth-rail__tick depth-rail__tick--active" data-section="services-intro">
+        <span class="depth-rail__label">Overview</span>
+      </li>
+      <li class="depth-rail__tick" data-section="services-list">
+        <span class="depth-rail__label">Services</span>
+      </li>
+      <li class="depth-rail__tick" data-section="services-future">
+        <span class="depth-rail__label">Ahead</span>
+      </li>
+    </ul>
+  </nav>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__logo" href="index.html" aria-label="Sana Rehal — home">
+        <span class="nav__logo-mark" aria-hidden="true">•SR</span>
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+        <span class="u-visually-hidden">Open menu</span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+      </button>
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li class="nav__item"><a class="nav__link" href="index.html">Home</a></li>
+        <li class="nav__item"><a class="nav__link" href="about.html">About</a></li>
+        <li class="nav__item"><a class="nav__link" href="projects.html">Projects</a></li>
+        <li class="nav__item"><a class="nav__link nav__link--current" href="services.html" aria-current="page">Services</a></li>
+        <li class="nav__item"><a class="nav__link" href="contact.html">Contact</a></li>
+        <li class="nav__item"><a class="nav__link nav__link--resume" href="resume.html">Résumé</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="services-intro" id="services-intro" aria-labelledby="services-intro-heading">
+      <p class="services-intro__eyebrow">Services</p>
+      <h1 class="services-intro__heading" id="services-intro-heading">
+        What I take on, and how it runs.
+      </h1>
+      <p class="services-intro__body">
+        I work with a small number of clients at a time, usually
+        end-to-end from a rough idea through to a shipped, maintained
+        interface.
+      </p>
+    </section>
+
+    <section class="services-list" id="services-list" aria-label="Services offered">
+
+      <!-- Service 1: text-left / number-right identity -->
+      <article class="service-card service-card--split" data-reveal>
+        <div class="service-card__text">
+          <h2 class="service-card__title">Website development</h2>
+          <p class="service-card__body">
+            Full builds from a design or a rough brief — semantic
+            HTML, handcrafted CSS, and vanilla JavaScript, no
+            framework overhead unless the project genuinely needs one.
+          </p>
+        </div>
+        <span class="service-card__mark font-mono" aria-hidden="true">01</span>
+      </article>
+
+      <!-- Service 2: icon-left identity -->
+      <article class="service-card service-card--icon-lead" data-reveal>
+        <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M2 9h20" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M6 21h12" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <div class="service-card__text">
+          <h2 class="service-card__title">Responsive design</h2>
+          <p class="service-card__body">
+            Built for the smallest screen first, not shrunk down from
+            desktop afterward — separate interaction models for touch
+            and pointer, not just breakpoints.
+          </p>
+        </div>
+      </article>
+
+      <!-- Service 3: wide, quote-style identity -->
+      <article class="service-card service-card--wide" data-reveal>
+        <h2 class="service-card__title">Landing pages</h2>
+        <p class="service-card__body">
+          Focused, single-purpose pages for a launch, a campaign, or a
+          waitlist — built fast, measured honestly, and easy to hand
+          off to whoever runs the campaign after me.
+        </p>
+      </article>
+
+      <!-- Service 4: text-left / icon-right identity (mirrors service 2) -->
+      <article class="service-card service-card--icon-trail" data-reveal>
+        <div class="service-card__text">
+          <h2 class="service-card__title">UI / UX design</h2>
+          <p class="service-card__body">
+            Interface design that accounts for real states — empty,
+            loading, error — not just the happy path shown in a
+            polished mockup.
+          </p>
+        </div>
+        <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M12 8v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </article>
+
+      <!-- Service 5: stacked stat identity -->
+      <article class="service-card service-card--stat" data-reveal>
+        <div class="service-card__text">
+          <h2 class="service-card__title">Performance optimization</h2>
+          <p class="service-card__body">
+            Auditing and fixing what's actually slow — render-blocking
+            assets, layout shift, unnecessary JavaScript — with numbers
+            measured before and after, not assumed.
+          </p>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Future services — visually broken from the grid rhythm:
+         larger, dashed-glass border, signaling "not yet" through
+         form alone (Design Bible / signature interactions). -->
+    <section class="services-future" id="services-future" aria-labelledby="services-future-heading">
+      <div class="services-future__card">
+        <h2 class="services-future__heading" id="services-future-heading">
+          Full-stack services — coming as I take them on
+        </h2>
+        <p class="services-future__body">
+          I'm extending into lightweight backend work (APIs, simple
+          data layers) so I can offer full-stack builds for smaller
+          products. Not offered as a formal service yet — ask if your
+          project needs it and I'll tell you honestly whether I'm ready.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="index.html" aria-label="Sana Rehal — home">
+        <span class="nav__logo-mark" aria-hidden="true">•SR</span>
+      </a>
+      <nav class="site-footer__links" aria-label="Footer">
+        <ul class="site-footer__link-list" role="list">
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="resume.html">Résumé</a></li>
+        </ul>
+      </nav>
+      <ul class="site-footer__social" role="list" aria-label="Social links">
+        <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:hello@sanarehal.dev">Email</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">
+        © <span id="current-year">2026</span> Sana Rehal. Built by hand with HTML, CSS, and JavaScript.
+      </p>
+      <button class="site-footer__back-to-top" type="button" aria-label="Back to top">↑</button>
+    </div>
+  </footer>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</body>
+</html>

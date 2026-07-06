@@ -296,3 +296,931 @@ main {
 .closing-cta__body {
   color: var(--text-muted);
 }
+
+
+/* ================================================================
+   ABOUT (about.html)
+   Story -> Skills -> Timeline -> Stats -> Values.
+   ================================================================ */
+.page--about .aurora__source--a {
+  opacity: 0.4; /* Aurora-A strong on About intro too — Design Bible §16 */
+}
+
+.story {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-7) var(--space-3) var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .story {
+    padding: var(--space-7) var(--space-5) var(--space-6);
+  }
+}
+
+.story__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+}
+
+.story__heading {
+  max-width: 20ch;
+  margin-bottom: var(--space-4);
+}
+
+.story__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 62ch;
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+}
+
+.skills {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .skills {
+    padding: var(--space-6) var(--space-5);
+  }
+}
+
+.skills__heading {
+  margin-bottom: var(--space-4);
+}
+
+.skills__groups {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .skills__groups {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.skills__group-title {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.skills__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.skills__badge {
+  font-size: var(--text-small);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border-resting);
+  background-color: rgba(18, 20, 26, 0.4);
+  color: var(--text-primary);
+}
+
+.timeline {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .timeline {
+    padding: var(--space-6) var(--space-5);
+  }
+}
+
+.timeline__heading {
+  margin-bottom: var(--space-5);
+}
+
+.timeline__list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--glass-border-resting);
+}
+
+.timeline__item {
+  position: relative;
+}
+
+/* Fuse-fill: the connector "arms" as each node reveals, rather than
+   the whole line fading in at once (Design Bible / micro-interactions
+   §2, unique to this page). Implemented as a growing pseudo-element
+   tied to the shared [data-reveal] state. */
+.timeline__item::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--space-4) * -1 - 1px);
+  top: 0;
+  width: 2px;
+  height: 0%;
+  background-color: var(--accent-line);
+  box-shadow: 0 0 8px rgba(94, 234, 212, 0.6);
+  transition: height 900ms var(--ease-settle);
+}
+
+.timeline__item.is-revealed::before {
+  height: 100%;
+}
+
+.timeline__marker {
+  display: inline-block;
+  color: var(--accent-line);
+  margin-bottom: var(--space-1);
+}
+
+.timeline__title {
+  margin-bottom: var(--space-1);
+}
+
+.timeline__body {
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+
+.stats {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .stats {
+    padding: var(--space-6) var(--space-5);
+  }
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .stats__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.stats__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border-resting);
+  background-color: rgba(18, 20, 26, 0.4);
+}
+
+.stats__number {
+  font-size: 2rem;
+  color: var(--accent-line);
+}
+
+.stats__label {
+  color: var(--text-muted);
+  font-size: var(--text-small);
+}
+
+.values {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-3) var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .values {
+    padding: var(--space-6) var(--space-5) var(--space-8);
+  }
+}
+
+.values__heading {
+  margin-bottom: var(--space-4);
+}
+
+.values__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .values__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.values__item {
+  padding: var(--space-3);
+  border-top: 1px solid var(--glass-border-resting);
+}
+
+.values__item-body {
+  color: var(--text-muted);
+}
+
+
+/* ================================================================
+   PROJECTS (projects.html)
+   Overview -> filterable grid (8/4 hierarchy) -> future work.
+   ================================================================ */
+.page--projects .aurora__source--b {
+  opacity: 0.3; /* Aurora-B strongest on Projects/Services — Design Bible §16 */
+}
+
+.projects-intro {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-7) var(--space-3) var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .projects-intro {
+    padding: var(--space-7) var(--space-5) var(--space-5);
+  }
+}
+
+.projects-intro__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+}
+
+.projects-intro__heading {
+  max-width: 20ch;
+  margin-bottom: var(--space-3);
+}
+
+.projects-intro__body {
+  max-width: 52ch;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.project-filters__chip {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-border-resting);
+  color: var(--text-muted);
+  font-size: var(--text-small);
+  min-height: 44px; /* touch target, Design Bible Mobile-First Strategy */
+  transition: border-color var(--duration-micro) var(--ease-linear-out),
+              color var(--duration-micro) var(--ease-linear-out);
+}
+
+.project-filters__chip--active {
+  color: var(--text-primary);
+  border-color: var(--accent-line);
+}
+
+.projects-grid-section {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-4) var(--space-3) var(--space-7);
+}
+
+@media (min-width: 768px) {
+  .projects-grid-section {
+    padding: var(--space-4) var(--space-5) var(--space-7);
+  }
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .project-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  /* First project is the hero project, spans 8 of 12 columns; the
+     rest take 4 — one deliberate hierarchy, not a flat repeating
+     grid (Design Bible §13). */
+  .project-card--large {
+    grid-column: span 8;
+  }
+
+  .project-card:not(.project-card--large) {
+    grid-column: span 4;
+  }
+}
+
+.project-card--large .project-card__media {
+  aspect-ratio: 16 / 9;
+}
+
+.project-grid__empty {
+  grid-column: 1 / -1;
+  color: var(--text-muted);
+  text-align: center;
+  padding: var(--space-5) 0;
+}
+
+.projects-future {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: 0 var(--space-3) var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .projects-future {
+    padding: 0 var(--space-5) var(--space-8);
+  }
+}
+
+.projects-future__card {
+  padding: var(--space-5);
+  border: 1px dashed var(--glass-border-active);
+  border-radius: var(--radius-lg);
+}
+
+.projects-future__body {
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+
+/* Project detail modal — top layer, own dimmed backdrop
+   (Design Bible §15, glass hierarchy tier 3). */
+.project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3);
+  background-color: rgba(6, 7, 9, 0.7);
+}
+
+/* The .project-modal rule above sets `display: flex`, which has
+   higher specificity than the browser's default `[hidden] { display:
+   none }` and would otherwise override it — silently showing an
+   empty modal on every page load. This rule restores correct
+   hidden-attribute behavior; JS in projects.js only ever toggles
+   the `hidden` attribute, never a class, so this must stay in sync
+   with that approach. */
+.project-modal[hidden] {
+  display: none;
+}
+
+.project-modal:not([hidden]) {
+  display: flex;
+}
+
+.project-modal__dialog {
+  position: relative;
+  max-width: 640px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+}
+
+.project-modal__close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border-resting);
+  color: var(--text-muted);
+}
+
+.project-modal__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-3);
+}
+
+.project-modal__category {
+  color: var(--accent-line);
+  text-transform: uppercase;
+  margin-bottom: var(--space-1);
+}
+
+.project-modal__title {
+  margin-bottom: var(--space-2);
+}
+
+.project-modal__full-description {
+  color: var(--text-muted);
+  line-height: var(--leading-body);
+}
+
+
+/* ================================================================
+   SERVICES (services.html)
+   Five distinct micro-layouts, one broken-rhythm future card.
+   ================================================================ */
+.page--services .aurora__source--b {
+  opacity: 0.3;
+}
+
+.services-intro {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-7) var(--space-3) var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .services-intro {
+    padding: var(--space-7) var(--space-5) var(--space-5);
+  }
+}
+
+.services-intro__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+}
+
+.services-intro__heading {
+  max-width: 20ch;
+  margin-bottom: var(--space-3);
+}
+
+.services-intro__body {
+  max-width: 52ch;
+  color: var(--text-muted);
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: 0 var(--space-3) var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .services-list {
+    padding: 0 var(--space-5) var(--space-6);
+  }
+}
+
+.service-card {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border-resting);
+  background-color: rgba(18, 20, 26, 0.4);
+}
+
+.service-card__title {
+  margin-bottom: var(--space-1);
+}
+
+.service-card__body {
+  color: var(--text-muted);
+  max-width: 60ch;
+}
+
+/* 01 — text-left / number-right */
+.service-card--split {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.service-card__mark {
+  font-size: 1.5rem;
+  color: var(--glass-border-active);
+}
+
+/* 02 — icon-left */
+.service-card--icon-lead {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.service-card__icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  color: var(--accent-line);
+}
+
+/* 03 — wide, quote-style, no icon/number at all */
+.service-card--wide {
+  padding: var(--space-5);
+}
+
+.service-card--wide .service-card__title {
+  font-size: var(--text-h3);
+}
+
+/* 04 — icon-right (mirrors 02, but reversed, and text leads) */
+.service-card--icon-trail {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+/* 05 — stacked, quieter, closes the rhythm */
+.service-card--stat {
+  border-style: solid;
+}
+
+.services-future {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: 0 var(--space-3) var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .services-future {
+    padding: 0 var(--space-5) var(--space-8);
+  }
+}
+
+.services-future__card {
+  padding: var(--space-5);
+  border: 1px dashed var(--glass-border-active);
+  border-radius: var(--radius-lg);
+}
+
+.services-future__body {
+  color: var(--text-muted);
+  max-width: 56ch;
+}
+
+
+/* ================================================================
+   CONTACT (contact.html)
+   Split screen: intro + floating contact cards (left), glass form
+   (right). Denser, slightly darker glass than other pages (Design
+   Bible / Experience Architecture — "dimming the lights" moment).
+   ================================================================ */
+.page--contact .aurora__source--a {
+  opacity: 0.22;
+}
+
+.page--contact .aurora__source--b {
+  opacity: 0.32;
+}
+
+.contact-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: var(--space-7) var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .contact-main {
+    grid-template-columns: 5fr 7fr;
+    padding: var(--space-7) var(--space-5);
+  }
+}
+
+.contact-main__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+}
+
+.contact-main__heading {
+  max-width: 16ch;
+  margin-bottom: var(--space-3);
+}
+
+.contact-main__body {
+  color: var(--text-muted);
+  max-width: 44ch;
+  margin-bottom: var(--space-4);
+}
+
+.contact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.contact-cards__item {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border-resting);
+  background-color: rgba(18, 20, 26, 0.4);
+  /* Scattered, offset placement rather than a perfectly even stack
+     (Design Bible / Experience Architecture — "offset like
+     scattered instrument readouts"). */
+}
+
+.contact-cards__item:nth-child(2) {
+  margin-left: var(--space-3);
+}
+
+.contact-cards__item:nth-child(4) {
+  margin-left: var(--space-2);
+}
+
+.contact-cards__label {
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.contact-form-wrapper {
+  position: relative;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  transition: transform 500ms var(--ease-settle);
+}
+
+.contact-form-wrapper--settled {
+  transform: scale(0.99);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.contact-form__label {
+  font-size: var(--text-small);
+  color: var(--text-muted);
+}
+
+.contact-form__input {
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border-resting);
+  background-color: rgba(10, 11, 14, 0.4);
+  color: var(--text-primary);
+  transition: border-color var(--duration-micro) var(--ease-linear-out),
+              box-shadow var(--duration-micro) var(--ease-linear-out);
+}
+
+/* Field glows from within on focus — border brightens + soft inner
+   glow, not an outer box-shadow halo (Design Bible / micro-
+   interactions §2). */
+.contact-form__input:focus {
+  border-color: var(--accent-line);
+  box-shadow: inset 0 0 12px rgba(94, 234, 212, 0.15);
+  outline: none; /* :focus-visible global ring still applies for keyboard users */
+}
+
+.contact-form__input--textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-form__error {
+  color: #F87171;
+  font-size: var(--text-small);
+}
+
+.contact-form__submit {
+  align-self: flex-start;
+  margin-top: var(--space-1);
+  min-height: 44px;
+}
+
+.contact-form__success {
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+  padding: var(--space-4) 0;
+}
+
+/* Same fix as .project-modal above — see that comment for why this
+   pairing is required whenever a component sets its own `display`
+   and is also toggled via the `hidden` attribute from JS. */
+.contact-form__success[hidden] {
+  display: none;
+}
+
+.contact-form__success:not([hidden]) {
+  display: flex;
+}
+
+.contact-form__check {
+  width: 64px;
+  height: 64px;
+}
+
+.contact-form__check-circle {
+  stroke: var(--accent-line);
+  stroke-width: 2;
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+}
+
+.contact-form__check-mark {
+  stroke: var(--accent-line);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 36;
+  stroke-dashoffset: 36;
+}
+
+.contact-form__success.is-visible .contact-form__check-circle {
+  animation: check-circle-draw 500ms var(--ease-settle) forwards;
+}
+
+.contact-form__success.is-visible .contact-form__check-mark {
+  animation: check-mark-draw 400ms var(--ease-settle) 450ms forwards;
+}
+
+@keyframes check-circle-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes check-mark-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-form__success.is-visible .contact-form__check-circle,
+  .contact-form__success.is-visible .contact-form__check-mark {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+.contact-location {
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding: 0 var(--space-3) var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .contact-location {
+    padding: 0 var(--space-5) var(--space-8);
+  }
+}
+
+.contact-location__heading {
+  margin-bottom: var(--space-3);
+}
+
+.contact-location__map {
+  aspect-ratio: 16 / 6;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border-resting);
+  background-color: var(--bg-panel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-location__map-label {
+  color: var(--text-muted);
+}
+
+
+/* ================================================================
+   RÉSUMÉ (resume.html)
+   Print-friendly, calm — the most restrained page on the site.
+   ================================================================ */
+.resume-summary,
+.resume-experience,
+.resume-education {
+  max-width: 760px;
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .resume-summary,
+  .resume-experience,
+  .resume-education {
+    padding: var(--space-6) var(--space-5);
+  }
+}
+
+.resume-summary {
+  padding-top: var(--space-7);
+}
+
+.resume-summary__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+}
+
+.resume-summary__role {
+  color: var(--accent-line);
+  font-family: var(--font-mono);
+  margin-bottom: var(--space-3);
+}
+
+.resume-summary__body {
+  color: var(--text-muted);
+  max-width: 56ch;
+  margin-bottom: var(--space-4);
+}
+
+.resume-experience__heading,
+.resume-education__heading {
+  margin-bottom: var(--space-4);
+}
+
+.resume-entry {
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--glass-border-resting);
+}
+
+.resume-entry__header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: var(--space-1);
+}
+
+@media (min-width: 768px) {
+  .resume-entry__header {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+}
+
+.resume-entry__period {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.resume-entry__body {
+  color: var(--text-muted);
+  max-width: 60ch;
+}
+
+@media print {
+  .depth-rail,
+  .site-header,
+  .site-footer,
+  .aurora,
+  .noise-layer,
+  .cursor-glow {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  main {
+    padding-left: 0 !important;
+  }
+}

@@ -1,0 +1,1294 @@
+/* ================================================================
+   COMPONENTS.CSS
+   Reusable, page-agnostic pieces only: glass system, nav, footer,
+   buttons, cards, depth rail, decorative light/noise/cursor layers.
+   A rule here must work correctly if the component is dropped into
+   any page. Page-specific arrangement lives in pages.css instead
+   (Design Bible §30).
+   ================================================================ */
+
+
+/* ----------------------------------------------------------------
+   1. GLASS SYSTEM
+   Three-tier hierarchy (Design Bible §15). Structural glass (nav,
+   depth rail) never brightens on hover — it must stay a stable
+   reference point. Content glass (cards) moves from Level 1 to
+   Level 2 on hover/focus. Modal glass is visually distinct from both.
+   Max 2 blur values exist site-wide — see --blur-level-1/2 in base.css.
+   ---------------------------------------------------------------- */
+.glass--structural {
+  background-color: rgba(18, 20, 26, 0.72);
+  backdrop-filter: blur(var(--blur-level-1));
+  -webkit-backdrop-filter: blur(var(--blur-level-1));
+  border: 1px solid var(--glass-border-resting);
+}
+
+.glass--content {
+  background-color: rgba(18, 20, 26, 0.55);
+  backdrop-filter: blur(var(--blur-level-1));
+  -webkit-backdrop-filter: blur(var(--blur-level-1));
+  border: 1px solid var(--glass-border-resting);
+  transition: border-color var(--duration-micro) var(--ease-linear-out),
+              background-color var(--duration-micro) var(--ease-linear-out);
+}
+
+.glass--content:hover,
+.glass--content:focus-within {
+  background-color: rgba(18, 20, 26, 0.68);
+  backdrop-filter: blur(var(--blur-level-2));
+  -webkit-backdrop-filter: blur(var(--blur-level-2));
+  border-color: var(--glass-border-active);
+}
+
+.glass--modal {
+  background-color: rgba(14, 15, 19, 0.86);
+  backdrop-filter: blur(var(--blur-level-2));
+  -webkit-backdrop-filter: blur(var(--blur-level-2));
+  border: 1px solid var(--glass-border-active);
+}
+
+/* Fallback for browsers without backdrop-filter support: glass
+   still reads as a solid, readable panel (Design Bible §27). */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass--structural,
+  .glass--content,
+  .glass--modal {
+    background-color: var(--bg-panel);
+  }
+}
+
+
+/* ----------------------------------------------------------------
+   2. DECORATIVE LIGHT / NOISE / CURSOR LAYERS
+   Layer System order: void(0) → aurora(1) → noise(2) →
+   floating(3) → content(10) → rail(20) → header(25) → cursor(30).
+   These containers are populated/driven by main.js (scroll-reactive
+   opacity) but their look and stacking are fully defined here.
+   ---------------------------------------------------------------- */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-aurora);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora__source {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  max-width: 900px;
+  max-height: 900px;
+  border-radius: 50%;
+  filter: blur(120px);
+  will-change: opacity; /* transform is never animated on this layer — cost control */
+}
+
+.aurora__source--a {
+  top: -10%;
+  left: -10%;
+  background: var(--aurora-blue);
+  opacity: 0.35;
+}
+
+.aurora__source--b {
+  bottom: -15%;
+  right: -10%;
+  background: var(--aurora-violet);
+  opacity: 0.22; /* dimmer at rest on Home; strengthens on Projects/Services per page CSS */
+}
+
+.noise-layer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-noise);
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  background-image: url("../assets/icons/noise.svg");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor-glow);
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(76, 127, 255, 0.16), transparent 70%);
+  pointer-events: none;
+  opacity: 0; /* toggled to 1 by main.js only on fine-pointer devices, over interactive zones */
+  transform: translate(-50%, -50%);
+  transition: opacity var(--duration-micro) var(--ease-linear-out);
+}
+
+/* Cursor glow is never rendered at all on coarse/touch pointers
+   (Design Bible rule 26) — belt-and-suspenders alongside the JS
+   feature detection in main.js. */
+@media (hover: none), (pointer: coarse) {
+  .cursor-glow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora__source {
+    animation: none !important;
+  }
+}
+
+
+/* ----------------------------------------------------------------
+   3. DEPTH RAIL
+   The site's signature motif (Design Bible §7). Fixed, full-height
+   vertical instrument on desktop; relocates to a horizontal bar
+   under the header on mobile (Design Bible §7 of Experience
+   Architecture — Mobile-First Interaction Strategy).
+   ---------------------------------------------------------------- */
+.depth-rail {
+  position: fixed;
+  z-index: var(--z-depth-rail);
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: var(--space-6);
+}
+
+.depth-rail__track {
+  position: relative;
+  width: 2px;
+  flex: 1;
+  background-color: var(--glass-border-resting);
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+}
+
+.depth-rail__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%; /* driven by main.js scroll listener, rAF-throttled */
+  background-color: var(--accent-line);
+  box-shadow: 0 0 8px rgba(94, 234, 212, 0.6);
+  transition: height var(--duration-micro) linear;
+}
+
+.depth-rail__ticks {
+  position: absolute;
+  top: var(--space-6);
+  bottom: var(--space-6);
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateX(-50%);
+}
+
+.depth-rail__tick {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--glass-border-active);
+  transition: background-color var(--duration-micro) var(--ease-linear-out),
+              box-shadow var(--duration-micro) var(--ease-linear-out);
+}
+
+.depth-rail__tick--active {
+  background-color: var(--accent-line);
+  box-shadow: 0 0 10px rgba(94, 234, 212, 0.7);
+}
+
+.depth-rail__label {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-micro) var(--ease-linear-out);
+}
+
+.depth-rail__tick--active .depth-rail__label {
+  color: var(--accent-line);
+  opacity: 1;
+}
+
+/* Mobile: rail becomes a slim horizontal bar under the header
+   rather than a rotated version of the desktop rail — same
+   function (position + label), different geometry appropriate to
+   a narrow viewport (Design Bible / Mobile-First Interaction Strategy). */
+@media (max-width: 767px) {
+  .depth-rail {
+    top: 64px; /* sits directly under the fixed header */
+    left: 0;
+    width: 100%;
+    height: 3px;
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .depth-rail__track {
+    width: 100%;
+    height: 100%;
+  }
+
+  .depth-rail__fill {
+    width: 0%;
+    height: 100%;
+  }
+
+  .depth-rail__ticks {
+    display: none; /* current-section label shown in header instead on mobile */
+  }
+}
+
+
+/* ----------------------------------------------------------------
+   4. SITE HEADER / PRIMARY NAVIGATION
+   Sticky glass bar, structural glass tier (never brightens).
+   Underline draws from the cursor's entry direction via a JS-set
+   custom property (--underline-origin), set in animations.js.
+   ---------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  margin-inline: auto;
+  max-width: var(--grid-max-width);
+}
+
+@media (min-width: 768px) {
+  .nav {
+    padding: var(--space-2) var(--space-5);
+  }
+}
+
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav__logo-mark {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--text-body);
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+}
+
+/* Hamburger toggle — visible only below the desktop breakpoint */
+.nav__toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px; /* 44px minimum touch target, Design Bible Mobile-First Strategy */
+  padding: 0;
+}
+
+.nav__toggle-line {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background-color: var(--text-primary);
+  transition: transform var(--duration-micro) var(--ease-linear-out),
+              opacity var(--duration-micro) var(--ease-linear-out);
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-line:nth-child(2) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-line:nth-child(3) {
+  opacity: 0;
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-line:nth-child(4) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+@media (min-width: 768px) {
+  .nav__toggle {
+    display: none;
+  }
+}
+
+/* Menu: full-screen glass drawer on mobile, inline row on desktop */
+.nav__menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  background-color: rgba(10, 11, 14, 0.96);
+  backdrop-filter: blur(var(--blur-level-2));
+  -webkit-backdrop-filter: blur(var(--blur-level-2));
+  transform: translateX(100%);
+  transition: transform var(--duration-structural) var(--ease-settle);
+}
+
+.nav__menu.is-open {
+  transform: translateX(0);
+}
+
+@media (min-width: 768px) {
+  .nav__menu {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    flex-direction: row;
+    gap: var(--space-4);
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transform: none;
+    transition: none;
+  }
+}
+
+.nav__link {
+  position: relative;
+  font-size: var(--text-body);
+  color: var(--text-muted);
+  padding-bottom: 4px;
+  transition: color var(--duration-micro) var(--ease-linear-out);
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--accent-line);
+  transform: scaleX(0);
+  transform-origin: var(--underline-origin, left);
+  transition: transform var(--duration-micro) var(--ease-linear-out);
+}
+
+.nav__link:hover,
+.nav__link:focus-visible {
+  color: var(--text-primary);
+}
+
+.nav__link:hover::after,
+.nav__link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.nav__link--current {
+  color: var(--text-primary);
+}
+
+.nav__link--current::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav__link--resume {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border-active);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-2);
+}
+
+.nav__link--resume::after {
+  display: none; /* this link is styled as a small button, not an underline link */
+}
+
+
+/* ----------------------------------------------------------------
+   5. BUTTONS
+   Two tiers only (Design Bible §19, rule 11-12). Primary: filled,
+   pill radius, slow internal gradient drift. Secondary: glass
+   outline, --radius-sm. Magnetic pull + ripple are applied via
+   animations.js on fine-pointer devices only.
+   ---------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-body);
+  line-height: 1;
+  transition: transform var(--duration-micro) var(--ease-linear-out),
+              background-position var(--duration-micro) var(--ease-linear-out),
+              border-color var(--duration-micro) var(--ease-linear-out);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn--primary {
+  border-radius: var(--radius-pill);
+  color: var(--text-on-accent);
+  background-image: linear-gradient(
+    100deg,
+    var(--aurora-blue) 0%,
+    var(--aurora-violet) 50%,
+    var(--aurora-blue) 100%
+  );
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  animation: btn-gradient-drift 8s linear infinite;
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  animation-duration: 3s; /* motion speeds up in response to attention, not on its own */
+}
+
+@keyframes btn-gradient-drift {
+  to {
+    background-position: 200% 0%;
+  }
+}
+
+.btn--secondary {
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  background-color: transparent;
+  border: 1px solid var(--glass-border-active);
+}
+
+.btn--secondary:hover,
+.btn--secondary:focus-visible {
+  border-color: var(--accent-line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--primary {
+    animation: none;
+    background-position: 0% 0%;
+  }
+}
+
+
+/* ----------------------------------------------------------------
+   6a. SECTION REVEAL (shared, used via [data-reveal] across pages)
+   Structural transition — 750ms settle curve, staggered by
+   animations.js via inline delay. Collapses to nothing under
+   reduced motion (handled globally in base.css, reinforced here).
+   ---------------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-structural) var(--ease-settle),
+              transform var(--duration-structural) var(--ease-settle);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ----------------------------------------------------------------
+   6b. BUTTON RIPPLE
+   Single soft radial fade on click — never a hard Material ripple.
+   ---------------------------------------------------------------- */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn__ripple {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  margin: -6px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  animation: btn-ripple-fade 600ms ease-out forwards;
+}
+
+@keyframes btn-ripple-fade {
+  from {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(14);
+    opacity: 0;
+  }
+}
+
+
+/* ----------------------------------------------------------------
+   6. PROJECT CARD
+   Content-glass tier. Data-driven structure so new projects never
+   require new layout code (Design Bible rule 49). Cursor-relative
+   tilt + glow-from-cursor-position are applied by animations.js on
+   projects.html only (Design Bible — signature interaction unique
+   to that page); this base card styling is shared everywhere a card
+   appears, including the Home teaser.
+   ---------------------------------------------------------------- */
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform var(--duration-micro) var(--ease-linear-out);
+}
+
+/* Glow border that follows the cursor's actual position on the
+   card, driven by --glow-x/--glow-y set in animations.js
+   (window.__initCardTilt). Projects-page-only in practice, since
+   only that page calls __initCardTilt — but defined here as a
+   reusable capability, not duplicated per page. */
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    var(--accent-line) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-micro) var(--ease-linear-out);
+  pointer-events: none;
+}
+
+.project-card:hover::after {
+  opacity: 0.5;
+}
+
+.project-card__media {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background-color: var(--bg-panel);
+}
+
+.project-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.05) hue-rotate(-2deg); /* cool duotone pass, Design Bible §8 */
+}
+
+.project-card__body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.project-card__category {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--accent-line);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.project-card__title {
+  font-size: var(--text-h3);
+  font-weight: 600;
+}
+
+.project-card__description {
+  color: var(--text-muted);
+  line-height: var(--leading-body);
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+}
+
+.project-card__tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  border: 1px solid var(--glass-border-resting);
+  border-radius: var(--radius-xs);
+  padding: 2px var(--space-1);
+}
+
+.project-card__links {
+  margin-top: var(--space-2);
+}
+
+
+/* ----------------------------------------------------------------
+   7. SITE FOOTER
+   Minimal, shared across every page (Design Bible / Experience
+   Architecture footer spec).
+   ---------------------------------------------------------------- */
+.site-footer {
+  position: relative;
+  z-index: var(--z-content);
+  padding: var(--space-6) var(--space-3) var(--space-4);
+  border-top: 1px solid var(--glass-border-resting);
+}
+
+@media (min-width: 768px) {
+  .site-footer {
+    padding: var(--space-7) var(--space-5) var(--space-4);
+  }
+}
+
+.site-footer__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding-bottom: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .site-footer__top {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.site-footer__link-list,
+.site-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.site-footer__link-list a,
+.site-footer__social a {
+  color: var(--text-muted);
+  font-size: var(--text-small);
+  transition: color var(--duration-micro) var(--ease-linear-out);
+}
+
+.site-footer__link-list a:hover,
+.site-footer__social a:hover,
+.site-footer__link-list a:focus-visible,
+.site-footer__social a:focus-visible {
+  color: var(--text-primary);
+}
+
+.site-footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--glass-border-resting);
+}
+
+@media (min-width: 768px) {
+  .site-footer__bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.site-footer__copyright {
+  font-size: var(--text-small);
+  color: var(--text-muted);
+}
+
+.site-footer__back-to-top {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border-resting);
+  color: var(--text-muted);
+  transition: color var(--duration-micro) var(--ease-linear-out),
+              border-color var(--duration-micro) var(--ease-linear-out);
+}
+
+.site-footer__back-to-top:hover,
+.site-footer__back-to-top:focus-visible {
+  color: var(--accent-line);
+  border-color: var(--accent-line);
+}
+
+
+/* ----------------------------------------------------------------
+   8. SCROLL REVEAL (shared utility, driven by one IntersectionObserver
+   in animations.js — Design Bible §31 / rule 36). data-reveal-* on
+   the element is read by JS to pick the right threshold per type.
+   ---------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--duration-structural) var(--ease-settle),
+              transform var(--duration-structural) var(--ease-settle);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* ----------------------------------------------------------------
+   9. SERVICE CARD
+   Each service gets a distinct micro-layout via modifiers, never a
+   repeated identical box (Design Bible rule 15 / Experience
+   Architecture — Services).
+   ---------------------------------------------------------------- */
+.service-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 640px) {
+  .service-card {
+    grid-template-columns: 72px 1fr;
+    align-items: start;
+  }
+
+  .service-card--alt {
+    grid-template-columns: 1fr 72px;
+  }
+
+  .service-card--alt .service-card__icon {
+    order: 2;
+  }
+}
+
+.service-card__icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border-resting);
+  color: var(--accent-line);
+}
+
+.service-card__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.service-card__title {
+  font-size: var(--text-h3);
+  margin-bottom: var(--space-1);
+}
+
+.service-card__body {
+  color: var(--text-muted);
+}
+
+.service-card__list {
+  margin-top: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+}
+
+/* The "future services" card breaks the grid rhythm intentionally —
+   larger, dashed glass border, no icon column (Design Bible — the
+   card's form itself signals "not yet, but coming"). */
+.service-card--future {
+  grid-template-columns: 1fr;
+  border: 1px dashed var(--glass-border-active);
+  background-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+
+/* ----------------------------------------------------------------
+   10. TIMELINE (About page)
+   Vertical instrument track, echoes the depth rail's fuse-fill
+   language. Numbered/sequential — earned here because the content
+   is genuinely chronological (Design Bible rule 14).
+   ---------------------------------------------------------------- */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-left: var(--space-4);
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5px;
+  width: 2px;
+  background-color: var(--glass-border-resting);
+}
+
+.timeline__item {
+  position: relative;
+}
+
+.timeline__marker {
+  position: absolute;
+  left: -27px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--bg-panel);
+  border: 2px solid var(--glass-border-active);
+  transition: background-color var(--duration-micro) var(--ease-linear-out),
+              border-color var(--duration-micro) var(--ease-linear-out),
+              box-shadow var(--duration-micro) var(--ease-linear-out);
+}
+
+/* "Arms" when it scrolls into the active zone — added via the same
+   reveal observer, distinct is-armed class so the fuse effect only
+   plays once and stays lit (not a hover state). */
+.timeline__item.is-armed .timeline__marker {
+  background-color: var(--accent-line);
+  border-color: var(--accent-line);
+  box-shadow: 0 0 10px rgba(94, 234, 212, 0.7);
+}
+
+.timeline__year {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--accent-line);
+}
+
+.timeline__title {
+  font-size: var(--text-h3);
+  margin: var(--space-1) 0;
+}
+
+.timeline__body {
+  color: var(--text-muted);
+}
+
+
+/* ----------------------------------------------------------------
+   11. STAT CARDS (About page)
+   ---------------------------------------------------------------- */
+.stat-card {
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  text-align: left;
+}
+
+.stat-card__number {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+
+.stat-card__label {
+  font-size: var(--text-small);
+  color: var(--text-muted);
+}
+
+
+/* ----------------------------------------------------------------
+   12. SKILL GROUPS / BADGES (About page)
+   No progress bars anywhere (Design Bible rule 13).
+   ---------------------------------------------------------------- */
+.skills-group__title {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+}
+
+.skills-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.skill-badge {
+  padding: 6px var(--space-2);
+  border-radius: var(--radius-xs);
+  font-size: var(--text-small);
+  border: 1px solid var(--glass-border-resting);
+  color: var(--text-primary);
+  transition: border-color var(--duration-micro) var(--ease-linear-out),
+              transform var(--duration-micro) var(--ease-linear-out);
+}
+
+.skill-badge:hover,
+.skill-badge:focus-visible {
+  border-color: var(--accent-line);
+  transform: translateY(-2px);
+}
+
+
+/* ----------------------------------------------------------------
+   13. FILTER BAR (Projects page)
+   ---------------------------------------------------------------- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+.filter-chip {
+  padding: var(--space-1) var(--space-3);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-border-resting);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  transition: color var(--duration-micro) var(--ease-linear-out),
+              border-color var(--duration-micro) var(--ease-linear-out),
+              background-color var(--duration-micro) var(--ease-linear-out);
+}
+
+.filter-chip:hover,
+.filter-chip:focus-visible {
+  color: var(--text-primary);
+  border-color: var(--glass-border-active);
+}
+
+.filter-chip[aria-pressed="true"] {
+  color: var(--text-on-accent);
+  background-color: var(--accent-line);
+  border-color: var(--accent-line);
+}
+
+
+/* ----------------------------------------------------------------
+   14. PROJECT MODAL
+   Distinct modal-glass tier, own dimmed backdrop, focus-trapped by
+   projects.js (Design Bible rule 32).
+   ---------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background-color: rgba(6, 7, 9, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-micro) var(--ease-linear-out);
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  position: fixed;
+  z-index: var(--z-overlay);
+  top: 50%;
+  left: 50%;
+  width: min(90vw, 720px);
+  max-height: 85vh;
+  overflow-y: auto;
+  transform: translate(-50%, -50%) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  transition: opacity var(--duration-micro) var(--ease-settle),
+              transform var(--duration-micro) var(--ease-settle);
+}
+
+.modal.is-open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal__close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border-resting);
+  color: var(--text-muted);
+}
+
+.modal__close:hover,
+.modal__close:focus-visible {
+  color: var(--text-primary);
+  border-color: var(--accent-line);
+}
+
+.modal__title {
+  font-size: var(--text-h3);
+  margin-bottom: var(--space-2);
+  padding-right: var(--space-6);
+}
+
+.modal__body {
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+
+/* ----------------------------------------------------------------
+   15. CONTACT FORM
+   Fields glow at the border, not with a box-shadow halo — feels lit
+   from within (Design Bible / Experience Architecture — Contact).
+   ---------------------------------------------------------------- */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  transition: transform var(--duration-structural) var(--ease-settle);
+}
+
+.form-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.form-field__label {
+  font-size: var(--text-small);
+  color: var(--text-muted);
+}
+
+.form-field__input,
+.form-field__textarea {
+  width: 100%;
+  padding: var(--space-2);
+  min-height: 44px;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--glass-border-resting);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--duration-micro) var(--ease-linear-out),
+              box-shadow var(--duration-micro) var(--ease-linear-out);
+}
+
+.form-field__textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.form-field__input:focus,
+.form-field__textarea:focus {
+  outline: none;
+  border-color: var(--accent-line);
+  box-shadow: inset 0 0 0 1px var(--accent-line);
+}
+
+.form-field__error {
+  font-size: var(--text-small);
+  color: var(--aurora-violet);
+  min-height: 1.2em;
+}
+
+/* Success state: SVG checkmark that draws itself stroke-by-stroke,
+   then the panel settles (scale down slightly) — Design Bible §2. */
+.form-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+  padding: var(--space-5) 0;
+}
+
+.contact-form.is-submitted .form-success {
+  display: flex;
+}
+
+.contact-form.is-submitted .form-field,
+.contact-form.is-submitted .form-submit-btn {
+  display: none;
+}
+
+.contact-form.is-settling {
+  transform: scale(0.98);
+}
+
+.form-success__check {
+  width: 56px;
+  height: 56px;
+}
+
+.form-success__check-path {
+  stroke: var(--accent-line);
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  transition: stroke-dashoffset 600ms var(--ease-settle);
+}
+
+.contact-form.is-submitted .form-success__check-path {
+  stroke-dashoffset: 0;
+}
+
+
+/* ----------------------------------------------------------------
+   16. FLOATING CONTACT CARDS
+   ---------------------------------------------------------------- */
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+}
+
+.contact-card__icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-xs);
+  color: var(--accent-line);
+}
+
+.contact-card__label {
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  display: block;
+}
+
+.contact-card__value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.map-placeholder {
+  height: 220px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border-resting);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  background: linear-gradient(135deg, rgba(76, 127, 255, 0.06), rgba(139, 92, 246, 0.06));
+}
+
+
+/* ----------------------------------------------------------------
+   17. RESUME PAGE COMPONENTS
+   ---------------------------------------------------------------- */
+.resume-entry {
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--glass-border-resting);
+}
+
+.resume-entry__meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+}
+
+.resume-entry__title {
+  font-size: var(--text-h3);
+  margin: var(--space-1) 0;
+}
+
+.resume-entry__body {
+  color: var(--text-muted);
+}
+
+.resume-download-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-6);
+}
+
+/* Print styles: résumé must remain useful as an exported/printed
+   document, independent of the glass/aurora visual system. */
+@media print {
+  .aurora,
+  .noise-layer,
+  .depth-rail,
+  .cursor-glow,
+  .site-header,
+  .site-footer,
+  .resume-download-bar {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .resume-entry,
+  .resume-entry__body,
+  .resume-entry__meta {
+    color: #000;
+    border-color: #ccc;
+  }
+}

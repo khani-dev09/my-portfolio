@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Projects — Sana Rehal, Frontend Engineer</title>
+  <meta name="description" content="Selected frontend engineering projects by Sana Rehal — fintech dashboards, e-commerce interfaces, and a design system, with the constraints and decisions behind each.">
+  <meta name="author" content="Sana Rehal">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Projects — Sana Rehal">
+  <meta property="og:description" content="Selected work, with the reasoning behind it.">
+  <meta property="og:image" content="assets/images/og-cover.jpg">
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="page page--projects">
+
+  <a class="u-skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="aurora" aria-hidden="true">
+    <div class="aurora__source aurora__source--a"></div>
+    <div class="aurora__source aurora__source--b"></div>
+  </div>
+
+  <div class="noise-layer" aria-hidden="true"></div>
+
+  <nav class="depth-rail" aria-label="Page scroll progress">
+    <div class="depth-rail__track">
+      <div class="depth-rail__fill"></div>
+    </div>
+    <ul class="depth-rail__ticks" role="list">
+      <li class="depth-rail__tick depth-rail__tick--active" data-section="projects-intro">
+        <span class="depth-rail__label">Overview</span>
+      </li>
+      <li class="depth-rail__tick" data-section="projects-grid">
+        <span class="depth-rail__label">Work</span>
+      </li>
+      <li class="depth-rail__tick" data-section="projects-future">
+        <span class="depth-rail__label">Next up</span>
+      </li>
+    </ul>
+  </nav>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__logo" href="index.html" aria-label="Sana Rehal — home">
+        <span class="nav__logo-mark" aria-hidden="true">•SR</span>
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+        <span class="u-visually-hidden">Open menu</span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+      </button>
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li class="nav__item"><a class="nav__link" href="index.html">Home</a></li>
+        <li class="nav__item"><a class="nav__link" href="about.html">About</a></li>
+        <li class="nav__item"><a class="nav__link nav__link--current" href="projects.html" aria-current="page">Projects</a></li>
+        <li class="nav__item"><a class="nav__link" href="services.html">Services</a></li>
+        <li class="nav__item"><a class="nav__link" href="contact.html">Contact</a></li>
+        <li class="nav__item"><a class="nav__link nav__link--resume" href="resume.html">Résumé</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="projects-intro" id="projects-intro" aria-labelledby="projects-intro-heading">
+      <p class="projects-intro__eyebrow">Projects</p>
+      <h1 class="projects-intro__heading" id="projects-intro-heading">
+        A small number of projects, described honestly.
+      </h1>
+      <p class="projects-intro__body">
+        Each one below includes the real constraint I was working
+        under and the decision I made because of it — not just a
+        screenshot and a stack list.
+      </p>
+
+      <!-- Category filters -->
+      <div class="project-filters" role="group" aria-label="Filter projects by category">
+        <button class="project-filters__chip project-filters__chip--active" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="project-filters__chip" type="button" data-filter="fintech" aria-pressed="false">Fintech</button>
+        <button class="project-filters__chip" type="button" data-filter="ecommerce" aria-pressed="false">E-commerce</button>
+        <button class="project-filters__chip" type="button" data-filter="design-system" aria-pressed="false">Design systems</button>
+      </div>
+    </section>
+
+    <section class="projects-grid-section" id="projects-grid" aria-label="Project list">
+      <div class="project-grid">
+
+        <!-- Project 1 — hero project, spans 8 columns -->
+        <article
+          class="project-card project-card--large"
+          data-category="fintech"
+          data-title="Ledger — real-time reporting for treasury teams"
+          data-image="assets/images/project-placeholder-01.jpg"
+          data-image-alt="Dashboard interface for a fintech reporting tool, showing layered data cards and a dark UI"
+          data-full-description="Ledger's original dashboard was losing users to manual spreadsheet exports because the data displayed could be minutes or hours stale with no way to tell. The constraint was strict: five-year-old legacy data endpoints were out of scope for this project and couldn't be touched. The decision was to build an interface layer that made staleness itself visible — a small live/stale indicator tied to actual data timestamps, and a manual refresh action that was honest about what it could and couldn't guarantee. Export requests dropped by half within the first month after launch."
+        >
+          <div class="project-card__media" data-cursor-zone="blue">
+            <img class="project-card__image" src="assets/images/project-placeholder-01.jpg" alt="Dashboard interface for a fintech reporting tool, showing layered data cards and a dark UI" width="1200" height="800" loading="lazy">
+          </div>
+          <div class="project-card__body">
+            <p class="project-card__category font-mono">Fintech · Dashboard</p>
+            <h2 class="project-card__title">Ledger — real-time reporting for treasury teams</h2>
+            <p class="project-card__description">
+              Rebuilt a reporting dashboard around one constraint: legacy
+              data endpoints we couldn't touch. The fix made data
+              staleness visible instead of invisible.
+            </p>
+            <ul class="project-card__tags" role="list">
+              <li class="project-card__tag">TypeScript</li>
+              <li class="project-card__tag">D3.js</li>
+              <li class="project-card__tag">Design systems</li>
+            </ul>
+            <div class="project-card__links">
+              <a class="btn btn--secondary" href="#" data-modal-trigger>Read the case study</a>
+              <a class="btn btn--secondary" href="#" rel="noopener noreferrer">View live</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 — 4 columns -->
+        <article
+          class="project-card"
+          data-category="ecommerce"
+          data-title="Fernweg — a slower checkout, on purpose"
+          data-image="assets/images/project-placeholder-02.jpg"
+          data-image-alt="E-commerce product page with a large product photo and minimal checkout sidebar"
+          data-full-description="Fernweg sells handmade travel goods and wanted a faster checkout — the usual answer. Session recordings showed the opposite problem: people were abandoning carts because the flow felt rushed for a considered, higher-priced purchase. The decision was to slow the checkout down deliberately — one clear step at a time, larger product imagery held through to payment — rather than compress it into a single page. Completed checkouts increased without any change to pricing or shipping."
+        >
+          <div class="project-card__media" data-cursor-zone="violet">
+            <img class="project-card__image" src="assets/images/project-placeholder-02.jpg" alt="E-commerce product page with a large product photo and minimal checkout sidebar" width="1200" height="800" loading="lazy">
+          </div>
+          <div class="project-card__body">
+            <p class="project-card__category font-mono">E-commerce</p>
+            <h2 class="project-card__title">Fernweg — a slower checkout, on purpose</h2>
+            <p class="project-card__description">
+              Slowed a checkout flow down instead of speeding it up,
+              after recordings showed rushing was the actual problem.
+            </p>
+            <ul class="project-card__tags" role="list">
+              <li class="project-card__tag">JavaScript</li>
+              <li class="project-card__tag">Shopify Liquid</li>
+            </ul>
+            <div class="project-card__links">
+              <a class="btn btn--secondary" href="#" data-modal-trigger>Read the case study</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 — 4 columns -->
+        <article
+          class="project-card"
+          data-category="design-system"
+          data-title="Atlas — a design system for a five-person team"
+          data-image="assets/images/project-placeholder-03.jpg"
+          data-image-alt="Component library documentation page showing buttons, inputs, and color tokens"
+          data-full-description="Most design system advice assumes a dedicated platform team. Atlas had to work for five engineers with no time to maintain a separate library. The decision was to keep the entire system in plain CSS custom properties and a handful of documented components, rather than a build-tooled package — deliberately smaller in scope than what's usually recommended, chosen because it matched the team's actual capacity to maintain it."
+        >
+          <div class="project-card__media" data-cursor-zone="blue">
+            <img class="project-card__image" src="assets/images/project-placeholder-03.jpg" alt="Component library documentation page showing buttons, inputs, and color tokens" width="1200" height="800" loading="lazy">
+          </div>
+          <div class="project-card__body">
+            <p class="project-card__category font-mono">Design systems</p>
+            <h2 class="project-card__title">Atlas — a design system for a five-person team</h2>
+            <p class="project-card__description">
+              Scoped a design system down, not up — sized to what five
+              engineers could actually maintain.
+            </p>
+            <ul class="project-card__tags" role="list">
+              <li class="project-card__tag">CSS custom properties</li>
+              <li class="project-card__tag">Storybook</li>
+            </ul>
+            <div class="project-card__links">
+              <a class="btn btn--secondary" href="#" data-modal-trigger>Read the case study</a>
+            </div>
+          </div>
+        </article>
+
+        <p class="project-grid__empty" hidden>
+          Nothing here yet in this category — try another filter, or see everything.
+        </p>
+      </div>
+    </section>
+
+    <!-- Future projects placeholder, broken out of the grid rhythm -->
+    <section class="projects-future" id="projects-future" aria-labelledby="projects-future-heading">
+      <div class="projects-future__card">
+        <h2 class="projects-future__heading" id="projects-future-heading">More case studies coming</h2>
+        <p class="projects-future__body">
+          I add projects here as they wrap up, not before — so
+          everything above is finished, shipped work.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       Project detail modal — shared, populated from whichever card
+       triggered it. Focus-trapped, Escape-dismissible (Design Bible
+       rule 32). Hidden by default.
+       ============================================================ -->
+  <div class="project-modal" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" hidden>
+    <div class="project-modal__dialog glass--modal">
+      <button class="project-modal__close" type="button" aria-label="Close project details">✕</button>
+      <img class="project-modal__image" src="" alt="">
+      <p class="project-modal__category font-mono"></p>
+      <h2 class="project-modal__title" id="project-modal-title"></h2>
+      <p class="project-modal__full-description"></p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="index.html" aria-label="Sana Rehal — home">
+        <span class="nav__logo-mark" aria-hidden="true">•SR</span>
+      </a>
+      <nav class="site-footer__links" aria-label="Footer">
+        <ul class="site-footer__link-list" role="list">
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="resume.html">Résumé</a></li>
+        </ul>
+      </nav>
+      <ul class="site-footer__social" role="list" aria-label="Social links">
+        <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:hello@sanarehal.dev">Email</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">
+        © <span id="current-year">2026</span> Sana Rehal. Built by hand with HTML, CSS, and JavaScript.
+      </p>
+      <button class="site-footer__back-to-top" type="button" aria-label="Back to top">↑</button>
+    </div>
+  </footer>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/projects.js" defer></script>
+</body>
+</html>

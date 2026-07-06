@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Résumé — Sana Rehal, Frontend Engineer</title>
+  <meta name="description" content="Sana Rehal's résumé — experience, education, and skills. Downloadable as a PDF.">
+  <meta name="author" content="Sana Rehal">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Résumé — Sana Rehal">
+  <meta property="og:description" content="Experience, education, and skills.">
+  <meta property="og:image" content="assets/images/og-cover.jpg">
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="page page--resume">
+
+  <a class="u-skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="aurora" aria-hidden="true">
+    <div class="aurora__source aurora__source--a"></div>
+    <div class="aurora__source aurora__source--b"></div>
+  </div>
+
+  <div class="noise-layer" aria-hidden="true"></div>
+
+  <nav class="depth-rail" aria-label="Page scroll progress">
+    <div class="depth-rail__track">
+      <div class="depth-rail__fill"></div>
+    </div>
+    <ul class="depth-rail__ticks" role="list">
+      <li class="depth-rail__tick depth-rail__tick--active" data-section="resume-summary">
+        <span class="depth-rail__label">Summary</span>
+      </li>
+      <li class="depth-rail__tick" data-section="resume-experience">
+        <span class="depth-rail__label">Experience</span>
+      </li>
+      <li class="depth-rail__tick" data-section="resume-education">
+        <span class="depth-rail__label">Education</span>
+      </li>
+    </ul>
+  </nav>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__logo" href="index.html" aria-label="Sana Rehal — home">
+        <span class="nav__logo-mark" aria-hidden="true">•SR</span>
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+        <span class="u-visually-hidden">Open menu</span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+      </button>
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li class="nav__item"><a class="nav__link" href="index.html">Home</a></li>
+        <li class="nav__item"><a class="nav__link" href="about.html">About</a></li>
+        <li class="nav__item"><a class="nav__link" href="projects.html">Projects</a></li>
+        <li class="nav__item"><a class="nav__link" href="services.html">Services</a></li>
+        <li class="nav__item"><a class="nav__link" href="contact.html">Contact</a></li>
+        <li class="nav__item"><a class="nav__link nav__link--current nav__link--resume" href="resume.html" aria-current="page">Résumé</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="resume-summary" id="resume-summary" aria-labelledby="resume-summary-heading">
+      <p class="resume-summary__eyebrow">Résumé</p>
+      <h1 class="resume-summary__heading" id="resume-summary-heading">Sana Rehal</h1>
+      <p class="resume-summary__role">Frontend Engineer &amp; Interaction Designer</p>
+      <p class="resume-summary__body">
+        Five years building production frontend interfaces, with a
+        focus on motion, accessibility, and interfaces that hold up
+        under real, messy data — not just a polished demo.
+      </p>
+      <a class="btn btn--primary" href="assets/documents/sana-rehal-resume.pdf" download>
+        Download résumé (PDF)
+      </a>
+    </section>
+
+    <section class="resume-experience" id="resume-experience" aria-labelledby="resume-experience-heading">
+      <h2 class="resume-experience__heading" id="resume-experience-heading">Experience</h2>
+
+      <article class="resume-entry" data-reveal>
+        <div class="resume-entry__header">
+          <h3 class="resume-entry__title">Freelance Frontend Engineer</h3>
+          <span class="resume-entry__period font-mono">2024 — Present</span>
+        </div>
+        <p class="resume-entry__body">
+          Selected client projects across fintech, e-commerce, and
+          design systems — see the Projects page for detailed case
+          studies.
+        </p>
+      </article>
+
+      <article class="resume-entry" data-reveal>
+        <div class="resume-entry__header">
+          <h3 class="resume-entry__title">Frontend Engineer, Ledger Financial</h3>
+          <span class="resume-entry__period font-mono">2023 — 2024</span>
+        </div>
+        <p class="resume-entry__body">
+          Rebuilt a real-time reporting dashboard for treasury teams
+          on top of legacy data endpoints that couldn't be modified.
+        </p>
+      </article>
+
+      <article class="resume-entry" data-reveal>
+        <div class="resume-entry__header">
+          <h3 class="resume-entry__title">Operations Associate, internal tools</h3>
+          <span class="resume-entry__period font-mono">2019 — 2023</span>
+        </div>
+        <p class="resume-entry__body">
+          Built scheduling and reporting tools for a small operations
+          team, starting in spreadsheets and ending in JavaScript.
+        </p>
+      </article>
+    </section>
+
+    <section class="resume-education" id="resume-education" aria-labelledby="resume-education-heading">
+      <h2 class="resume-education__heading" id="resume-education-heading">Education</h2>
+      <article class="resume-entry" data-reveal>
+        <div class="resume-entry__header">
+          <h3 class="resume-entry__title">B.Sc. Computer Science, part-time</h3>
+          <span class="resume-entry__period font-mono">2021 — 2024</span>
+        </div>
+        <p class="resume-entry__body">
+          Completed evenings and weekends alongside full-time work.
+        </p>
+      </article>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="index.html" aria-label="Sana Rehal — home">
+        <span class="nav__logo-mark" aria-hidden="true">•SR</span>
+      </a>
+      <nav class="site-footer__links" aria-label="Footer">
+        <ul class="site-footer__link-list" role="list">
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="resume.html">Résumé</a></li>
+        </ul>
+      </nav>
+      <ul class="site-footer__social" role="list" aria-label="Social links">
+        <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:hello@sanarehal.dev">Email</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">
+        © <span id="current-year">2026</span> Sana Rehal. Built by hand with HTML, CSS, and JavaScript.
+      </p>
+      <button class="site-footer__back-to-top" type="button" aria-label="Back to top">↑</button>
+    </div>
+  </footer>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</body>
+</html>

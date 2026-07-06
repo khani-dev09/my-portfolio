@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>About — Sana Rehal, Frontend Engineer</title>
+  <meta name="description" content="How Sana Rehal got into frontend engineering, what she's learned along the way, and the values that shape how she builds interfaces today.">
+  <meta name="author" content="Sana Rehal">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About — Sana Rehal">
+  <meta property="og:description" content="Journey, skills, and the values behind the work.">
+  <meta property="og:image" content="assets/images/og-cover.jpg">
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="page page--about">
+
+  <a class="u-skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="aurora" aria-hidden="true">
+    <div class="aurora__source aurora__source--a"></div>
+    <div class="aurora__source aurora__source--b"></div>
+  </div>
+
+  <div class="noise-layer" aria-hidden="true"></div>
+
+  <nav class="depth-rail" aria-label="Page scroll progress">
+    <div class="depth-rail__track">
+      <div class="depth-rail__fill"></div>
+    </div>
+    <ul class="depth-rail__ticks" role="list">
+      <li class="depth-rail__tick depth-rail__tick--active" data-section="story">
+        <span class="depth-rail__label">Story</span>
+      </li>
+      <li class="depth-rail__tick" data-section="skills">
+        <span class="depth-rail__label">Skills</span>
+      </li>
+      <li class="depth-rail__tick" data-section="timeline">
+        <span class="depth-rail__label">Timeline</span>
+      </li>
+      <li class="depth-rail__tick" data-section="values">
+        <span class="depth-rail__label">Values</span>
+      </li>
+    </ul>
+  </nav>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__logo" href="index.html" aria-label="Sana Rehal — home">
+        <span class="nav__logo-mark" aria-hidden="true">•SR</span>
+      </a>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+        <span class="u-visually-hidden">Open menu</span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+        <span class="nav__toggle-line" aria-hidden="true"></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li class="nav__item"><a class="nav__link" href="index.html">Home</a></li>
+        <li class="nav__item"><a class="nav__link nav__link--current" href="about.html" aria-current="page">About</a></li>
+        <li class="nav__item"><a class="nav__link" href="projects.html">Projects</a></li>
+        <li class="nav__item"><a class="nav__link" href="services.html">Services</a></li>
+        <li class="nav__item"><a class="nav__link" href="contact.html">Contact</a></li>
+        <li class="nav__item"><a class="nav__link nav__link--resume" href="resume.html">Résumé</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ==========================================================
+         Story — the journey. Specific, not generic (Design Bible
+         §24 — one honest small vulnerability included, per rule).
+         ========================================================== -->
+    <section class="story" id="story" aria-labelledby="story-heading">
+      <p class="story__eyebrow">About</p>
+      <h1 class="story__heading" id="story-heading">
+        I got into this because a spreadsheet macro wasn't enough.
+      </h1>
+      <div class="story__body">
+        <p>
+          I started in a small operations team, building internal
+          tools out of necessity — first in Excel, then in Google
+          Apps Script, then in actual JavaScript once I realized the
+          macros were quietly becoming a real application. Nobody
+          told me to learn frontend engineering; I backed into it
+          trying to make a scheduling tool stop breaking every time
+          someone renamed a column.
+        </p>
+        <p>
+          I studied Computer Science later than most — evenings and
+          weekends, alongside the job that started this — and I still
+          think that order taught me the right lesson: interfaces
+          exist to make someone else's work easier, not to showcase
+          the tool that built them.
+        </p>
+        <p>
+          Right now, I'm going deeper into motion and interaction
+          design — not because it's trendy, but because I've noticed
+          how much trust a well-timed transition can build in a
+          product, and how rarely that gets treated as engineering
+          rather than decoration. I'm also, honestly, still working
+          on writing documentation as carefully as I write code.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         Skills — grouped glass badges, no progress bars
+         (Design Bible rule 13).
+         ========================================================== -->
+    <section class="skills" id="skills" aria-labelledby="skills-heading">
+      <h2 class="skills__heading" id="skills-heading">What I work with</h2>
+
+      <div class="skills__groups">
+        <div class="skills__group" data-reveal>
+          <h3 class="skills__group-title font-mono">Frontend</h3>
+          <ul class="skills__badges" role="list">
+            <li class="skills__badge">JavaScript (ES6+)</li>
+            <li class="skills__badge">TypeScript</li>
+            <li class="skills__badge">HTML5 &amp; CSS3</li>
+            <li class="skills__badge">Accessibility (WCAG)</li>
+            <li class="skills__badge">Motion &amp; interaction design</li>
+          </ul>
+        </div>
+
+        <div class="skills__group" data-reveal>
+          <h3 class="skills__group-title font-mono">Tools</h3>
+          <ul class="skills__badges" role="list">
+            <li class="skills__badge">Figma</li>
+            <li class="skills__badge">Git &amp; GitHub</li>
+            <li class="skills__badge">Vite</li>
+            <li class="skills__badge">Storybook</li>
+          </ul>
+        </div>
+
+        <div class="skills__group" data-reveal>
+          <h3 class="skills__group-title font-mono">Currently learning</h3>
+          <ul class="skills__badges" role="list">
+            <li class="skills__badge">WebGL fundamentals</li>
+            <li class="skills__badge">Technical writing</li>
+          </ul>
+        </div>
+
+        <div class="skills__group" data-reveal>
+          <h3 class="skills__group-title font-mono">Soft skills</h3>
+          <ul class="skills__badges" role="list">
+            <li class="skills__badge">Scoping ambiguous work</li>
+            <li class="skills__badge">Design–engineering handoff</li>
+            <li class="skills__badge">Written async communication</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         Timeline — vertical instrument track. Nodes "arm" with a
+         fuse-fill line as they scroll into view (animations.js +
+         components.css handle the fill; structure only here).
+         Genuinely sequential content, so numbering is earned here
+         (Design Bible rule 14).
+         ========================================================== -->
+    <section class="timeline" id="timeline" aria-labelledby="timeline-heading">
+      <h2 class="timeline__heading" id="timeline-heading">Timeline</h2>
+
+      <ol class="timeline__list">
+        <li class="timeline__item" data-reveal>
+          <span class="timeline__marker font-mono">2019</span>
+          <div class="timeline__content">
+            <h3 class="timeline__title">Started in operations</h3>
+            <p class="timeline__body">
+              Built internal scheduling and reporting tools out of
+              necessity, first in spreadsheets, then in Apps Script.
+            </p>
+          </div>
+        </li>
+        <li class="timeline__item" data-reveal>
+          <span class="timeline__marker font-mono">2021</span>
+          <div class="timeline__content">
+            <h3 class="timeline__title">Began studying Computer Science</h3>
+            <p class="timeline__body">
+              Evenings and weekends, part-time, while continuing to
+              build tools on the job — theory caught up to practice.
+            </p>
+          </div>
+        </li>
+        <li class="timeline__item" data-reveal>
+          <span class="timeline__marker font-mono">2023</span>
+          <div class="timeline__content">
+            <h3 class="timeline__title">First frontend engineering role</h3>
+            <p class="timeline__body">
+              Joined a small fintech team rebuilding a legacy reporting
+              dashboard — the project featured on the Projects page.
+            </p>
+          </div>
+        </li>
+        <li class="timeline__item" data-reveal>
+          <span class="timeline__marker font-mono">Now</span>
+          <div class="timeline__content">
+            <h3 class="timeline__title">Freelancing, selectively</h3>
+            <p class="timeline__body">
+              Taking on a small number of projects at a time, and
+              spending the rest of my time going deeper into motion
+              and interaction design.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ==========================================================
+         Stats — quick, concrete numbers. No filler adjectives.
+         ========================================================== -->
+    <section class="stats" id="stats-cards" aria-label="Quick facts">
+      <ul class="stats__grid" role="list">
+        <li class="stats__card" data-reveal>
+          <span class="stats__number font-mono">5+</span>
+          <span class="stats__label">years writing production frontend code</span>
+        </li>
+        <li class="stats__card" data-reveal>
+          <span class="stats__number font-mono">1</span>
+          <span class="stats__label">design system maintained end-to-end</span>
+        </li>
+        <li class="stats__card" data-reveal>
+          <span class="stats__number font-mono">100%</span>
+          <span class="stats__label">of projects keyboard-tested before ship</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ==========================================================
+         Values / mission
+         ========================================================== -->
+    <section class="values" id="values" aria-labelledby="values-heading">
+      <h2 class="values__heading" id="values-heading">What I optimize for</h2>
+      <div class="values__grid">
+        <article class="values__item" data-reveal>
+          <h3 class="values__item-title">Clarity over cleverness</h3>
+          <p class="values__item-body">
+            A clever abstraction that only I understand is a future
+            bug. I'd rather write the obvious version.
+          </p>
+        </article>
+        <article class="values__item" data-reveal>
+          <h3 class="values__item-title">Built for whoever inherits it</h3>
+          <p class="values__item-body">
+            I write code and docs assuming someone else — possibly a
+            future, tired version of me — has to maintain this.
+          </p>
+        </article>
+        <article class="values__item" data-reveal>
+          <h3 class="values__item-title">Access isn't optional</h3>
+          <p class="values__item-body">
+            If it doesn't work with a keyboard or a screen reader, it
+            isn't finished — regardless of how it looks in a demo.
+          </p>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="index.html" aria-label="Sana Rehal — home">
+        <span class="nav__logo-mark" aria-hidden="true">•SR</span>
+      </a>
+      <nav class="site-footer__links" aria-label="Footer">
+        <ul class="site-footer__link-list" role="list">
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="resume.html">Résumé</a></li>
+        </ul>
+      </nav>
+      <ul class="site-footer__social" role="list" aria-label="Social links">
+        <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:hello@sanarehal.dev">Email</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">
+        © <span id="current-year">2026</span> Sana Rehal. Built by hand with HTML, CSS, and JavaScript.
+      </p>
+      <button class="site-footer__back-to-top" type="button" aria-label="Back to top">↑</button>
+    </div>
+  </footer>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</body>
+</html>
